@@ -35,10 +35,9 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + outerRadius + "," + outerRadius + ")");
 
-d3.json("readme.json", function(error, imports) {
-  var indexByName = d3.map(),
-      nameByIndex = d3.map(),
-      matrix = [],
+d3.json("data.json", function(error, imports) {
+  var matrix = imports.adjacencyMatrix,
+  vertices = imports.vertices,
       n = 0;
       
   chord.matrix(matrix);
@@ -62,7 +61,7 @@ d3.json("readme.json", function(error, imports) {
             + (d.angle > Math.PI ? "rotate(180)" : "");
       })
       .style("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
-      .text(function(d) { return nameByIndex.get(d.index); });
+      .text(function(d) { return vertices[d.index].name; });
 
   svg.selectAll(".chord")
       .data(chord.chords)
