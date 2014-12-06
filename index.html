@@ -40,31 +40,7 @@ d3.json("readme.json", function(error, imports) {
       nameByIndex = d3.map(),
       matrix = [],
       n = 0;
-
-  // Returns the Flare package name for the given class name.
-  function name(name) {
-    return name.substring(0, name.lastIndexOf(".")).substring(6);
-  }
-
-  // Compute a unique index for each package name.
-  imports.forEach(function(d) {
-    if (!indexByName.has(d = name(d.name))) {
-      nameByIndex.set(n, d);
-      indexByName.set(d, n++);
-    }
-  });
-
-  // Construct a square matrix counting package imports.
-  imports.forEach(function(d) {
-    var source = indexByName.get(name(d.name)),
-        row = matrix[source];
-    if (!row) {
-     row = matrix[source] = [];
-     for (var i = -1; ++i < n;) row[i] = 0;
-    }
-    d.imports.forEach(function(d) { row[indexByName.get(name(d))]++; });
-  });
-
+      
   chord.matrix(matrix);
 
   var g = svg.selectAll(".group")
