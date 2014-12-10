@@ -18,7 +18,7 @@
 <script>
 
     // From http://mkweb.bcgsc.ca/circos/guide/tables/
-    d3.json("data_top.json", function (error, imports) {
+    d3.json("data_top_14.json", function (error, imports) {
         var matrix = imports.adjacency_matrix;
         var vertices = imports.vertices;
 //        var matrix = [
@@ -33,10 +33,10 @@
                 .sortSubgroups(d3.descending)
                 .matrix(matrix);
 
-        var width = 800,
-                height = 800,
-                innerRadius = Math.min(width, height) * .25,
-                outerRadius = innerRadius * 1.1;
+        var width = 1300,
+                height = 1000,
+                innerRadius = Math.min(width, height) * .35,
+                outerRadius = innerRadius * 1.05;
 
         var fill = d3.scale.ordinal()
                 .domain(d3.range(4))
